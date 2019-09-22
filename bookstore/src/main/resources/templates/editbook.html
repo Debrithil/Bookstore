@@ -1,18 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Book form</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<title>Booklist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Book</h1>
+
+<h2>Edit book on the list</h2>
+	<div>
 	<form action="#" th:action="@{/newbook}"  th:object= ${book} method="post">
-	<p>Title: <input type="text" th:field="${book.title}" /></p>
+	<input type="hidden" th:field="${book.id}" class="form-control"/>
 	<p>Author: <input type="text" th:field="${book.author}" /></p>
+	<p>Title: <input type="text" th:field="${book.title}" /></p>
+	<p>ISBN <input type="text" th:field="${book.isbn}" /></p>
 	<p>Year: <input type="text" th:field="${book.year}" /></p>
-	<p>ISBN: <input type="text" th:field="${book.isbn}" /></p>
-	<p>Price: <input type="text" th:field="${book.price}" /></p>
 	
 	<label for="categorylist">Category:</label>
 	
@@ -21,6 +23,7 @@
     </select>
     <p><input type="submit" class="btn btn-success" value="Submit" /> <input type="reset" class="btn btn-success" value="Reset" /></p>
 	</form>
-    
+</div>
+	
 </body>
 </html>
