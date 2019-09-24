@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 
 public class Book {
@@ -26,6 +28,7 @@ public class Book {
 	// konstruktorit
 	
     @ManyToOne // Book @ManyToOne Category
+    @JsonIgnore // estää @OneToMany:n, ettei @Entity vedä ikuista looppia
     @JoinColumn(name = "categoryid") // foreign key column is categoryid
     private Category category; // mappedBy = omistajaluokka, johon se kytkeytyy -> category
 	

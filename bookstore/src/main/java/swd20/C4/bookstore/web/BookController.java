@@ -1,6 +1,7 @@
 package swd20.C4.bookstore.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import swd20.C4.bookstore.domain.Book;
 import swd20.C4.bookstore.domain.BookRepository;
@@ -30,6 +32,18 @@ public class BookController {
 			model.addAttribute("books", books);
 			return "booklist";
 	}
+	
+	// RESTful hakee kirjalistauksen
+    @RequestMapping(value="/Apibooks", method = RequestMethod.GET)
+    public @ResponseBody List<Book> booksListRest() {	
+        return (List<Book>) bookRepository.findAll();
+    }    
+
+	// RESTful hakee kaikki kirjat id:n perusteella
+    @RequestMapping(value="/Apibooks/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
+    	return bookRepository.findById(bookId);
+    }     
 
 	// tyhjän kirjalomakkeen muodostaminen
 	@RequestMapping(value = "/newbook", method = RequestMethod.GET)
