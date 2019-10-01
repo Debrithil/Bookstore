@@ -9,7 +9,7 @@
 
 <h2>Edit book on the list</h2>
 	<div>
-	<form action="#" th:action="@{/newbook}"  th:object= ${book} method="post">
+	<form action="#" th:action="@{/savebook}"  th:object= ${book} method="post">
 	<input type="hidden" th:field="${book.id}" class="form-control"/>
 	<p>Author: <input type="text" th:field="${book.author}" /></p>
 	<p>Title: <input type="text" th:field="${book.title}" /></p>

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Book</h1>
-	<form action="#" th:action="@{/newbook}"  th:object= ${book} method="post">
+	<form action="#" th:action="@{/savebook}"  th:object= ${book} method="post">
 	<p>Title: <input type="text" th:field="${book.title}" /></p>
 	<p>Author: <input type="text" th:field="${book.author}" /></p>
 	<p>Year: <input type="text" th:field="${book.year}" /></p>

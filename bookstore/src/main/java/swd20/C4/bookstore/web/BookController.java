@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,12 @@ public class BookController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
+	// Kirjautuminen
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+	
 	// kirjalistaus
 	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
 	public String getBooks(Model model) {
@@ -38,14 +45,21 @@ public class BookController {
     public @ResponseBody List<Book> booksListRest() {	
         return (List<Book>) bookRepository.findAll();
     }    
-
+    
 	// RESTful hakee kaikki kirjat id:n perusteella
     @RequestMapping(value="/Apibooks/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
     	return bookRepository.findById(bookId);
     }     
+    
+    // RESTful tallentaa uuden kirjan tiedot
+	@RequestMapping (value="/books", method = RequestMethod.POST)
+	public @ResponseBody Book saveNewBookRest(@RequestBody Book book){
+		return bookRepository.save(book);
+	}
+    
 
-	// tyhjän kirjalomakkeen muodostaminen
+	// kirjan lisäys
 	@RequestMapping(value = "/newbook", method = RequestMethod.GET)
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book()); // "tyhjä" kirja-olio
@@ -54,7 +68,7 @@ public class BookController {
 	}
 
 	// kirjalomakkeella syötettyjen tietojen vastaanotto ja tallennus
-	@RequestMapping(value = "/newbook", method = RequestMethod.POST)
+	@RequestMapping(value = "/savebook", method = RequestMethod.POST)
 	public String saveBook(@ModelAttribute Book book) {
 		// talletetaan yhden kirjan tiedot tietokantaan
 		bookRepository.save(book);
