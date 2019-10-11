@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -76,6 +77,7 @@ public class BookController {
 	}
 
 	// kirjan poisto
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/deletebook/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long bookId) {
 		bookRepository.deleteById(bookId);
@@ -84,6 +86,7 @@ public class BookController {
 	
 	
 	// kirjan muokkaus
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
