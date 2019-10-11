@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests().antMatchers("/css/**", "/h2-console/**").permitAll() // h2-console näkyviin, kun Spring Security asetukset on päällä
+        .authorizeRequests().antMatchers("/css/**", "/img/**", "/h2-console/**").permitAll() // h2-console näkyviin, kun Spring Security asetukset on päällä
         // .permitAll() - endpoint, jonka kaikki käyttäjät näkevät
         .and().csrf().ignoringAntMatchers("/h2-console/**")
         .and().headers().frameOptions().sameOrigin()

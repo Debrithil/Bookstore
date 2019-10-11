@@ -27,6 +27,14 @@ public class BookController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
+	// Etusivu
+	
+	@RequestMapping (value="/")
+	public String home() {
+		return "etusivu";
+		
+	}
+	
 	// Kirjautuminen
     @RequestMapping(value="/login")
     public String login() {	
