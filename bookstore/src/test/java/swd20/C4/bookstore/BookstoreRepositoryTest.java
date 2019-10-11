@@ -39,20 +39,20 @@ public class BookstoreRepositoryTest {
     
     @Test
     public void createNewBook() {
-    	Book book = new Book("Java-ohjelmointi", "Mika Vesterholm", 2018, "ISBN-9789521435560", 21.50, categoryRepository.findByName("IT").get(0)); // department tarvii id:n
+    	Book book = new Book("Matka ohjelmoinnin maailmaan", "Elina Hiltunen", 2015, "ISBN-9789523210561", 18.80, categoryRepository.findByName("IT").get(0)); // department tarvii id:n
     	bookRepository.save(book);
     	assertThat(book.getId()).isNotNull();
     }
     
     @Autowired
-    private UserRepository userRepository; // List<User> findByUsername(String title);
+    private UserRepository userRepository;
     
     @Test
-    public void findByUserNameShouldReturnUser() {
-    	List<User> users = userRepository.findByUsername("admin");
+    public void createNewUser() {
+    	User user4 = new User("testaaja2", "$2a$04$.QbzbE7N3QYoKJRkIwqy0eOnhnYNODks91wozM6oyJTJzpo.GFfyu", "testaaja2@bookstore.fi", "TESTAAJA2");
+    	userRepository.save(user4);
+    	assertThat(user4.getId()).isNotNull();
     	
-    	assertThat(users).hasSize(1); // tietokannassa on vain yksi "ADMIN" -käyttäjätunnus
-        assertThat(users.get(0).getEmail()).isEqualTo("admin@bookstore.fi"); // luo kirjalistan aina 0:sta
     	
     }
 
